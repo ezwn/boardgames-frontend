@@ -1,0 +1,39 @@
+
+.GameSessionListViewTitle {
+    display: flex;
+    flex: 1;
+}
+
+.GameSessionListViewTitle .title {
+    flex: 1;
+}
+
+.GameSessionList {
+    display: flex;
+    flex-direction: column;
+}
+
+.GameSessionListItem {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.PlayerList {
+    font-size: larger;
+}
+
+.GameSessionLabel {
+    margin-top: 4px;
+    font-weight: lighter;
+}
+
+.notALink {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.centeredMessage {
+    margin: auto;
+}

@@ -1,0 +1,85 @@
+  
+.location {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+}
+
+.location.white {
+    background-color: var(--cb-white-color);
+}
+
+.location.black {
+    background-color: var(--cb-black-color);
+}
+
+.location .innerDiv {
+    flex: 1;
+    border-radius: 100%;
+}
+
+.location.lastMove .innerDiv {
+    background-color: var(--cb-lastMove-bg-color);
+}
+
+.location.selected .innerDiv {
+    background-color: var(--cb-selected-bg-color) !important;
+}
+
+.location.canceledMove .innerDiv {
+    background-color: var(--cb-canceledMove-bg-color);
+}
+
+.piece .innerDiv {
+    background-image: url(pieces.svg);
+    background-repeat: no-repeat;
+    background-size: 600% 200%;
+}
+
+.piece-k .innerDiv {
+    background-position: 0% 100%;
+}
+
+.piece-q .innerDiv {
+    background-position: 20% 100%;
+}
+
+.piece-b .innerDiv {
+    background-position: 40% 100%;
+}
+
+.piece-n .innerDiv {
+    background-position: 60% 100%;
+}
+
+.piece-t .innerDiv {
+    background-position: 80% 100%;
+}
+
+.piece-p .innerDiv {
+    background-position: 100% 100%;
+}
+
+.piece-K .innerDiv {
+    background-position: 0% 0%;
+}
+
+.piece-Q .innerDiv {
+    background-position: 20% 0%;
+}
+
+.piece-B .innerDiv {
+    background-position: 40% 0%;
+}
+
+.piece-N .innerDiv {
+    background-position: 60% 0%
+}
+
+.piece-T .innerDiv {
+    background-position: 80% 0%
+}
+
+.piece-P .innerDiv {
+    background-position: 100% 0%
+}

@@ -1,0 +1,20 @@
+.NewGameSession {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.NewGameSession .field {
+    text-align: left;
+    margin-bottom: 70px;
+}
+
+.NewGameSession .label {
+    margin-bottom: 15px;
+    font-size: 75%;
+}
+
+.NewGameSession .input,  .NewGameSession input {
+    font-size: 125%;
+}

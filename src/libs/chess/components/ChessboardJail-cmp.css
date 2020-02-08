@@ -1,0 +1,9 @@
+
+.ChessboardJail {
+  display: flex;
+  margin: auto;
+  width: var(--cb-size);
+  height: calc(var(--cb-size)/16);
+  border: solid 10px;
+  border-color: var(--cb-black-color);
+}
