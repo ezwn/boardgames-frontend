@@ -1,0 +1,11 @@
+
+.AppView {
+    width: 100vw;
+    height: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+  }
+  
+.AppView .CenterArea {
+    flex: 1;
+}

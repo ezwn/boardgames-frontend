@@ -1,0 +1,14 @@
+
+.MyColorIndicator {
+  width:30px;
+  height:30px;
+  border-radius: 30px;
+}
+
+.MyColorIndicator.WHITE {
+  background-color: white;
+}
+
+.MyColorIndicator.BLACK {
+  background-color: black;
+}

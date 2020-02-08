@@ -1,0 +1,17 @@
+
+.ChessboardMainArea {
+  margin: auto;
+  width: var(--cb-size);
+  height: var(--cb-size);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: solid 10px;
+  border-color: var(--cb-black-color);
+}
+
+.row {
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+}

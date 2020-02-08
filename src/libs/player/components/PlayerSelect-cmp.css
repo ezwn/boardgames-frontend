@@ -1,0 +1,13 @@
+
+.playerCandidateList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.playerCandidate {
+    margin-top: 4px;
+    margin-right: 4px;
+    padding: 6px;
+    background: rgb(194, 194, 194);
+    cursor: pointer;
+}

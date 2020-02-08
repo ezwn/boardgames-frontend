@@ -1,0 +1,24 @@
+
+.TitleBar {
+    display: flex;
+    font-size: 21px;
+    padding: 6px;
+    background-color: var(--bg-color-alt);
+    color: var(--text-color-alt);
+    align-items: center;
+    height: 46px;
+}
+
+.TitleBar .title {
+    display: flex;
+    flex: 1;
+}
+
+.TitleBar .leftButton {
+    margin-right: 12px;
+}
+
+
+.TitleBar .rightButtonArea {
+    margin-left: 12px;
+}
