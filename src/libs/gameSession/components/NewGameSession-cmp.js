@@ -9,8 +9,9 @@ import {
   NewGameSessionProvider
 } from "libs/gameSession/contexts/NewGameSession-ctx";
 
-import "./NewGameSession-cmp.css";
 import { getTranslatedColorName } from "libs/chess/contexts/ChessEngine";
+
+import "./NewGameSession-cmp.css";
 
 export const NewGameSessionView = props => (
   <NewGameSessionProvider>

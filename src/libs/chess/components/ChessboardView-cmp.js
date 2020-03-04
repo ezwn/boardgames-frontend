@@ -6,7 +6,7 @@ import {
 } from "libs/gameSession/contexts/GameSession-ctx";
 import { AppView } from "libs/ezwn-mobile-ui/AppView-cmp";
 import { useParams } from "react-router";
-import { PlayerList } from "libs/gameSession/components/GameSessionList-cmp";
+import { PlayingList } from "libs/gameSession/components/PlayingList-cmp";
 import { ChessSessionProvider } from "../contexts/ChessSession-ctx";
 import { UndoButton, StopButton } from "libs/ezwn-mobile-ui/buttons";
 import { GameSessionStateInfo } from "./GameSessionStateInfo-cmp";
@@ -35,7 +35,7 @@ const ChessboardViewDumb = () => {
 
   return (
     <AppView
-      title={<PlayerList gameSession={gameSession} />}
+      title={<PlayingList playings={gameSession.playings} />}
       bottomBarContent={
         <>
           <UndoButton
