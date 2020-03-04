@@ -10,7 +10,7 @@ const initialState = JSON.stringify({
 });
 
 export const ChessSessionProvider = ({ children }) => {
-  const { gameSession, saveGameSession, deleteGameSession } = useContext(
+  const { gameSession, saveGameSession, deleteGameSession, patchGameSessionState } = useContext(
     GameSessionContext
   );
   const { currentPlayer } = useContext(CurrentPlayerContext);
@@ -24,9 +24,15 @@ export const ChessSessionProvider = ({ children }) => {
     to: null
   });
 
-  const myRole = gameSession.playings.find(
+  const me = gameSession.playings.find(
     p => p.player.playerId === currentPlayer.playerId
-  ).role;
+  );
+
+  const him = gameSession.playings.find(
+    p => p.player.playerId !== currentPlayer.playerId
+  );
+
+  const myRole = me.role;
 
   const persistantState = JSON.parse(gameSession.state || initialState);
 
@@ -107,13 +113,13 @@ export const ChessSessionProvider = ({ children }) => {
 
   if (nextMove.from && nextMove.to) {
     if (isValidMove(computedState, nextMove)) {
-      saveGameSession({
-        ...gameSession,
-        state: JSON.stringify({
+      patchGameSessionState(
+        JSON.stringify({
           ...persistantState,
           moves: [...moves, nextMove]
-        })
-      });
+        }),
+        him.playerId
+      );
     }
     setNextMove({
       from: undefined,
