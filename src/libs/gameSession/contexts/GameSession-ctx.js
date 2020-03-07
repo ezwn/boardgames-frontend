@@ -34,6 +34,16 @@ export const GameSessionProvider = ({ children, gameSessionId }) => {
     setGameSession(newGs);
   };
 
+  const patchGameSessionState = async (gsState, nextPlayerToPlay) => {
+    console.log(nextPlayerToPlay);
+
+    await api.patchGameSessionState(gameSessionId, gsState, nextPlayerToPlay);
+    setGameSession({
+      ...gameSession,
+      state: gsState
+    });
+  };
+
   const deleteGameSession = async gameSessionId => {
     await api.deleteGameSession(gameSessionId);
     history.push(`/`);
@@ -41,7 +51,7 @@ export const GameSessionProvider = ({ children, gameSessionId }) => {
 
   return gameSession ? (
     <GameSessionContext.Provider
-      value={{ gameSession, saveGameSession, deleteGameSession }}
+      value={{ gameSession, saveGameSession, deleteGameSession, patchGameSessionState }}
     >
       {children}
     </GameSessionContext.Provider>

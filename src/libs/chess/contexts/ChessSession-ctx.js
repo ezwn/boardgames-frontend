@@ -10,7 +10,7 @@ const initialState = JSON.stringify({
 });
 
 export const ChessSessionProvider = ({ children }) => {
-  const { gameSession, saveGameSession, deleteGameSession } = useContext(
+  const { gameSession, deleteGameSession, patchGameSessionState } = useContext(
     GameSessionContext
   );
   const { currentPlayer } = useContext(CurrentPlayerContext);
@@ -24,9 +24,15 @@ export const ChessSessionProvider = ({ children }) => {
     to: null
   });
 
-  const myRole = gameSession.playings.find(
+  const mePlaying = gameSession.playings.find(
     p => p.player.playerId === currentPlayer.playerId
-  ).role;
+  );
+
+  const himPlaying = gameSession.playings.find(
+    p => p.player.playerId !== currentPlayer.playerId
+  );
+
+  const myRole = mePlaying.role;
 
   const persistantState = JSON.parse(gameSession.state || initialState);
 
@@ -42,13 +48,13 @@ export const ChessSessionProvider = ({ children }) => {
   const deleteInvalidMoves = async () => {
     if (lastMove) {
       if (lastMove.canceled) {
-        await saveGameSession({
-          ...gameSession,
-          state: JSON.stringify({
+        await patchGameSessionState(
+          JSON.stringify({
             ...persistantState,
             moves: moves.filter(move => !move.canceled)
-          })
-        });
+          }),
+          mePlaying.player.playerId
+        );
       }
     }
   };
@@ -81,15 +87,15 @@ export const ChessSessionProvider = ({ children }) => {
     }
 
     if (lastMove) {
-      saveGameSession({
-        ...gameSession,
-        state: JSON.stringify({
+      patchGameSessionState(
+        JSON.stringify({
           ...persistantState,
           moves: moves.map((move, i) =>
             i === moves.length - 1 ? { ...move, canceled: true } : move
           )
-        })
-      });
+        }),
+        himPlaying.player.playerId
+      );
     }
   };
 
@@ -107,13 +113,13 @@ export const ChessSessionProvider = ({ children }) => {
 
   if (nextMove.from && nextMove.to) {
     if (isValidMove(computedState, nextMove)) {
-      saveGameSession({
-        ...gameSession,
-        state: JSON.stringify({
+      patchGameSessionState(
+        JSON.stringify({
           ...persistantState,
           moves: [...moves, nextMove]
-        })
-      });
+        }),
+        himPlaying.player.playerId
+      );
     }
     setNextMove({
       from: undefined,

@@ -11,6 +11,7 @@ import { Localized, LanguageSelector } from "libs/ezwn-i18n";
 
 import "./GameSessionList-cmp.css";
 import { AppView } from "libs/ezwn-mobile-ui/AppView-cmp";
+import { PlayingList } from "./PlayingList-cmp";
 
 export const GameSessionListView = () => {
   const { currentPlayer } = useContext(CurrentPlayerContext);
@@ -65,28 +66,25 @@ export const GameSessionList = () => {
 };
 
 export const GameSessionListItem = ({ gameSession }) => {
-  const { label, gameSessionId } = gameSession;
-
-  return (
-    <div className="GameSessionListItem">
-      <Link to={`/ChessboardView/${gameSessionId}`} className="notALink">
-        <PlayerList gameSession={gameSession} />
-        <div className="GameSessionLabel">{label}</div>
-      </Link>
-    </div>
-  );
-};
-
-export const PlayerList = ({ gameSession }) => {
   const { currentPlayer } = useContext(CurrentPlayerContext);
 
-  const { playings } = gameSession;
+  const { label, gameSessionId, playings } = gameSession;
+
+  const mePlaying = playings.find(
+    playing => playing.player.playerId === currentPlayer.playerId
+  );
+
+  const myTurn = mePlaying.nextToPlay;
+
   return (
-    <div className="PlayerList">
-      {playings
-        .filter(p => p.player.playerId !== currentPlayer.playerId)
-        .map(p => p.player.name)
-        .join(", ")}
-    </div>
+      <Link to={`/ChessboardView/${gameSessionId}`} className={`notALink GameSessionListItem${myTurn ? " myTurn" : ""}`}>
+        <div className='left'>
+          <PlayingList playings={playings} />
+          <div className="GameSessionLabel">{label}</div>
+        </div>
+        <div className='icon'>
+          &nbsp;
+        </div>
+      </Link>
   );
 };

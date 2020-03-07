@@ -7,11 +7,20 @@ export const MyGameSessionsProvider = ({ children, playerId }) => {
     const [myGameSessions, setMyGameSessions] = React.useState([]);
 
     React.useEffect(() => {
-        if (playerId) {
-            api.fetchGameSessions(playerId).then((myGameSessions) => {
-                setMyGameSessions(myGameSessions);
-            })
+        function fetchGameSession() {
+            if (playerId) {
+                api.fetchGameSessions(playerId).then((myGameSessions) => {
+                    setMyGameSessions(myGameSessions);
+                })
+            }
         }
+
+        const inteval = setInterval(fetchGameSession, 1000);
+        fetchGameSession();
+
+        return () => {
+            clearInterval(inteval);
+        };
     }, [playerId]);
 
     return <MyGameSessionsContext.Provider value={{ myGameSessions }}>

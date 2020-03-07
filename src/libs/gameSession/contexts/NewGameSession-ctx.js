@@ -22,10 +22,15 @@ export const NewGameSessionProvider = ({ children }) => {
 
     const gameSession = {
       playings: [
-        { role: myColor, player: { playerId: currentPlayer.playerId } },
+        {
+          role: myColor,
+          player: { playerId: currentPlayer.playerId },
+          nextToPlay: myColor === "WHITE"
+        },
         {
           role: myColor === "WHITE" ? "BLACK" : "WHITE",
-          player: { playerId: opponent.playerId }
+          player: { playerId: opponent.playerId },
+          nextToPlay: myColor !== "WHITE"
         }
       ]
     };
