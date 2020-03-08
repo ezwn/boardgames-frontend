@@ -1,17 +1,19 @@
 
 .TitleBar {
-    display: flex;
-    font-size: 21px;
-    padding: 6px;
+    box-sizing: border-box;
+    padding-left: 6px;
+    padding-right: 6px;
+
     background-color: var(--bg-color-alt);
     color: var(--text-color-alt);
+
+    display: flex;
     align-items: center;
-    height: 46px;
 }
 
 .TitleBar .title {
-    display: flex;
     flex: 1;
+    font-size: 21px;
 }
 
 .TitleBar .leftButton {

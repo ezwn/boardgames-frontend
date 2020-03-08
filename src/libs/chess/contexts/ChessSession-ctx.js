@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { GameSessionContext } from "libs/gameSession/contexts/GameSession-ctx";
 import { computeState, isValidMove, getColor } from "./ChessEngine";
 import { CurrentPlayerContext } from "libs/player/contexts/CurrentPlayer-ctx";
+import { EndGameSessionModal } from "../components/EndGameSessionModal-cmp";
+import { ModalOutputContext } from "libs/ezwn-mobile-ui/ModalOutput-cmp";
 
 export const ChessSessionContext = React.createContext(null);
 
@@ -13,6 +15,9 @@ export const ChessSessionProvider = ({ children }) => {
   const { gameSession, deleteGameSession, patchGameSessionState } = useContext(
     GameSessionContext
   );
+
+  const { setModal } = useContext(ModalOutputContext);
+
   const { currentPlayer } = useContext(CurrentPlayerContext);
 
   const [cancelGameSessionRequested, setCancelGameSessionRequested] = useState(
@@ -99,16 +104,18 @@ export const ChessSessionProvider = ({ children }) => {
     }
   };
 
-  const cancelGameSession = () => {
-    setCancelGameSessionRequested(true);
-  };
-
   const doNotCancelGameSession = () => {
+    setModal(null);
     setCancelGameSessionRequested(false);
   };
 
   const confirmCancelGameSession = () => {
+    setModal(null);
     deleteGameSession(gameSession.gameSessionId);
+  };
+
+  const cancelGameSession = () => {
+    setModal(<EndGameSessionModal confirmCancelGameSession={confirmCancelGameSession} doNotCancelGameSession={doNotCancelGameSession} />);
   };
 
   if (nextMove.from && nextMove.to) {

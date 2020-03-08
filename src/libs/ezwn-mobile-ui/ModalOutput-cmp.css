@@ -1,0 +1,13 @@
+.ModalOutput {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.233);
+    display: flex;
+}
+
+.Modal {
+    background-color: white;
+    width: 300px;
+    height: 200px;
+    margin: auto;
+    padding: 25px;
+}

@@ -14,8 +14,11 @@ import { ChessboardJail } from "./ChessboardJail-cmp";
 import { ChessSessionContext } from "../contexts/ChessSession-ctx";
 import { ChessboardMainArea } from "./ChessboardMainArea-cmp";
 import { MyColorIndicator } from "./MyColorIndicator-cmp";
+import { AppLayoutContext } from "libs/ezwn-mobile-ui/AppLayout-ctx";
 
 import "./ChessboardView-cmp.css";
+
+const chessboardViewPadding = 10;
 
 export const ChessboardView = props => {
   let { gameSessionId } = useParams();
@@ -32,6 +35,22 @@ export const ChessboardView = props => {
 const ChessboardViewDumb = () => {
   const { myTurn, invalidateMove, lastMove, cancelGameSession } = useContext(ChessSessionContext);
   const { gameSession } = useContext(GameSessionContext);
+  const { centerAreaWidth, centerAreaHeight } = useContext(AppLayoutContext);
+
+  const availableWidth = centerAreaWidth - chessboardViewPadding * 2;
+  const availableHeight = centerAreaHeight - chessboardViewPadding * 2;
+
+  const verticalMode = availableWidth < availableHeight;
+
+  const cbSize = verticalMode ?
+    Math.min(
+      availableWidth,
+      availableHeight * (8 / 9)
+    ) :
+    Math.min(
+      availableWidth * (8 / 9),
+      availableHeight
+    );
 
   return (
     <AppView
@@ -46,12 +65,12 @@ const ChessboardViewDumb = () => {
         </>
       }
       titleRightButtonArea={<MyColorIndicator />}
+      infoBar={<GameSessionStateInfo />}
     >
-      <div className="CenterArea ChessboardCenterArea">
-        <GameSessionStateInfo />
-        <ChessboardJail color="white" />
-        <ChessboardMainArea />
-        <ChessboardJail color="black" />
+      <div className={`CenterArea ChessboardCenterArea ${verticalMode ? 'vertical' : 'horizontal'}`}>
+        <ChessboardJail color="white" cbSize={cbSize} verticalMode={verticalMode} />
+        <ChessboardMainArea cbSize={cbSize} />
+        <ChessboardJail color="black" cbSize={cbSize} verticalMode={verticalMode} />
       </div>
     </AppView>
   );

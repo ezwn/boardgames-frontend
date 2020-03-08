@@ -1,0 +1,10 @@
+
+.EndGameSessionModal {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.EndGameSessionModal .message {
+  flex: 1;
+}

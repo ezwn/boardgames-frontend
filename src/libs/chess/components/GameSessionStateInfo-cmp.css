@@ -1,9 +1,10 @@
 
 .GameSessionStateInfo {
   text-align: center;
-  padding: 6px;
-  background-color: rgb(209, 209, 255);
-  margin-top: 0 !important;
+}
+
+.GameSessionStateInfo .info {
+  margin: auto;
 }
 
 .GameSessionStateInfo .canceledMove {
@@ -15,7 +16,6 @@
 .GameSessionStateInfo .yourTurn {
   color: darkgreen;
 }
-
 
 .GameSessionStateInfo .notYourTurn {
   color: darkred;

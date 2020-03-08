@@ -1,11 +1,20 @@
 
 .AppView {
-    width: 100vw;
-    height: -webkit-fill-available;
     display: flex;
     flex-direction: column;
   }
   
 .AppView .CenterArea {
     flex: 1;
+}
+
+.InfoBar {
+  box-sizing: border-box;
+  min-height: 30px;
+  height: 30px;
+  padding-left: 6px;
+  padding-right: 6px;
+
+  background-color: rgb(209, 209, 255);
+  margin-top: 0 !important;
 }

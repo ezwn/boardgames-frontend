@@ -8,25 +8,32 @@ import { NewGameSessionView } from "libs/gameSession/components/NewGameSession-c
 import { LocalizationProvider } from "libs/ezwn-i18n";
 
 import "./App-cmp.css";
+import { AppLayoutProvider } from "libs/ezwn-mobile-ui/AppLayout-ctx";
+import { ModalOutput, ModalOutputProvider } from "libs/ezwn-mobile-ui/ModalOutput-cmp";
 
 const App = () => (
-  <CurrentPlayerProvider>
-    <LocalizationProvider>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <GameSessionListView />
-          </Route>
-          <Route exact path="/ChessboardView/:gameSessionId">
-            <ChessboardView />
-          </Route>
-          <Route exact path="/NewGameSessionView">
-            <NewGameSessionView />
-          </Route>
-        </Switch>
-      </Router>
-    </LocalizationProvider>
-  </CurrentPlayerProvider>
+  <AppLayoutProvider>
+    <CurrentPlayerProvider>
+      <LocalizationProvider>
+        <ModalOutputProvider>
+          <ModalOutput />
+          <Router>
+            <Switch>
+              <Route exact path="/">
+                <GameSessionListView />
+              </Route>
+              <Route exact path="/ChessboardView/:gameSessionId">
+                <ChessboardView />
+              </Route>
+              <Route exact path="/NewGameSessionView">
+                <NewGameSessionView />
+              </Route>
+            </Switch>
+          </Router>
+        </ModalOutputProvider>
+      </LocalizationProvider>
+    </CurrentPlayerProvider>
+  </AppLayoutProvider>
 );
 
 export default App;

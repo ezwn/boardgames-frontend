@@ -4,11 +4,11 @@ import { ChessSessionContext } from "../contexts/ChessSession-ctx";
 
 import "./ChessboardMainArea-cmp.css";
 
-export const ChessboardMainArea = () => {
+export const ChessboardMainArea = ({ cbSize }) => {
   const { computedState } = useContext(ChessSessionContext);
 
   return (
-    <div className="ChessboardMainArea">
+    <div className="ChessboardMainArea" style={{ width: cbSize, height: cbSize }}>
       {computedState.board.map((rowData, l) => (
         <div className="row" key={`${l}`}>
           {rowData.split("").map((piece, c) => (

@@ -1,13 +1,22 @@
 
-.ChessboardCenterArea > div {
-  margin-top: 10px;
+.ChessboardCenterArea {
+  padding: 10px;
+}
+
+.ChessboardCenterArea.horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.ChessboardCenterArea.vertical {
+  display: flex;
+  flex-direction: column;
 }
 
 :root {
   --cb-black-color: rgb(105, 40, 14);
   --cb-white-color: rgb(230, 158, 129);
   --cb-margin: 20px;
-  --cb-size: calc(min(100vw, 58vh) - var(--cb-margin) * 2);
   --cb-selected-bg-color: rgb(70, 70, 255);
   --cb-lastMove-bg-color: yellow;
   --cb-canceledMove-bg-color: red;
