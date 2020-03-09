@@ -6,6 +6,7 @@ v0.6
 -----------------
 
 * dame blanche sur quase blanche
+* https://fr.wikipedia.org/wiki/En_passant_(%C3%A9checs)
 * choix pas clair lors de l'annulation
 * présenter l'échiquier dans le bon sens.
 * implémenter le changement d'un pion en un autre quand il atteint la dernière case.
