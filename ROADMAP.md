@@ -5,9 +5,14 @@ v0.5 (MVP 1 amis)
 v0.6
 -----------------
 
+* dame blanche sur quase blanche
+* choix pas clair lors de l'annulation
+* présenter l'échiquier dans le bon sens.
+* implémenter le changement d'un pion en un autre quand il atteint la dernière case.
 * suppression de la partie : statut plutôt que suppression effective / points par joueur
 * persistance choix langage
 * raison de l'annulation du dernier mouvement
+* annuler sois même le dernier mouvement ?
 
 Version publique
 ----------------
