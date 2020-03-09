@@ -2,6 +2,8 @@
 v0.5 (MVP 1 amis)
 -----------------
 
+* écrire les contextes avec useEffect + les rendre testables.
+
 v0.6
 -----------------
 
