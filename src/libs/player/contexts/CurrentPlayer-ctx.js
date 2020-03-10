@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as api from "../player-apic";
 
 export const CurrentPlayerContext = React.createContext(null);
@@ -24,18 +24,24 @@ export const CurrentPlayerProvider = ({ children }) => {
     try {
       const player = await api.login(playerId, password);
       setCurrentPlayer(player);
-    } catch (error) {}
+    } catch (error) { }
   };
 
-  if (!currentPlayer) {
-    var urlParams = new URLSearchParams(window.location.search);
-    const playerName = urlParams.get("playerName");
-    const playerPassword = urlParams.get("playerPassword");
+  const { search } = window.location;
 
-    if (playerName && playerPassword) {
-      login(playerName, playerPassword);
+  useEffect(() => {
+    if (!currentPlayer) {
+      var urlParams = new URLSearchParams(search);
+      const playerName = urlParams.get("playerName");
+      const playerPassword = urlParams.get("playerPassword");
+
+      if (playerName && playerPassword) {
+        login(playerName, playerPassword);
+      }
     }
+  }, [currentPlayer, search]);
 
+  if (!currentPlayer) {
     return <DefaultUnloggedComponent />;
   }
 

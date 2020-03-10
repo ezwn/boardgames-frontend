@@ -35,8 +35,6 @@ export const GameSessionProvider = ({ children, gameSessionId }) => {
   };
 
   const patchGameSessionState = async (gsState, nextPlayerToPlay) => {
-    console.log(nextPlayerToPlay);
-
     await api.patchGameSessionState(gameSessionId, gsState, nextPlayerToPlay);
     setGameSession({
       ...gameSession,

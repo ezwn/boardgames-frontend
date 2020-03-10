@@ -1,15 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { GameSessionContext } from "libs/gameSession/contexts/GameSession-ctx";
-import { computeState, isValidMove, getColor } from "./ChessEngine";
+import { isValidMove, getColor } from "./ChessEngine";
 import { CurrentPlayerContext } from "libs/player/contexts/CurrentPlayer-ctx";
 import { EndGameSessionModal } from "../components/EndGameSessionModal-cmp";
 import { ModalOutputContext } from "libs/ezwn-mobile-ui/ModalOutput-cmp";
+import { computeWorkState } from "./ChessSession-sml";
 
 export const ChessSessionContext = React.createContext(null);
-
-const initialState = JSON.stringify({
-  moves: []
-});
 
 export const ChessSessionProvider = ({ children }) => {
   const { gameSession, deleteGameSession, patchGameSessionState } = useContext(
@@ -29,26 +26,56 @@ export const ChessSessionProvider = ({ children }) => {
     to: null
   });
 
-  const mePlaying = gameSession.playings.find(
-    p => p.player.playerId === currentPlayer.playerId
-  );
+  const [workState, setWorkState] = useState({
+    persistantState: null,
+    moves: [],
+    computedState: null,
+    mePlaying: null,
+    himPlaying: null,
+    myRole: null
+  });
 
-  const himPlaying = gameSession.playings.find(
-    p => p.player.playerId !== currentPlayer.playerId
-  );
+  const { playerId } = currentPlayer;
 
-  const myRole = mePlaying.role;
+  useEffect(() => {
+    setWorkState(computeWorkState(playerId, gameSession));
+  }, [playerId, gameSession]);
 
-  const persistantState = JSON.parse(gameSession.state || initialState);
+  const {
+    persistantState,
+    computedState,
+    moves,
+    lastMove,
+    mePlaying,
+    himPlaying,
+    myRole,
+    myTurn
+  } = workState;
 
-  const { moves } = persistantState;
+  const hisPlayerId = himPlaying && himPlaying.player.playerId;
 
-  const computedState = computeState(moves);
+  useEffect(() => {
+    if (nextMove.from && nextMove.to) {
+      if (isValidMove(computedState, nextMove)) {
+        patchGameSessionState(
+          JSON.stringify({
+            ...persistantState,
+            moves: [...moves, nextMove]
+          }),
+          hisPlayerId
+        );
+      }
+      setNextMove({
+        from: undefined,
+        to: undefined
+      });
+    }
+  }, [computedState, nextMove, hisPlayerId, moves, patchGameSessionState, persistantState]);
 
-  const myTurn = computedState.player === myRole;
 
-  const lastMove =
-    moves && moves.length > 0 ? moves[moves.length - 1] : undefined;
+
+  if (!computedState)
+    return <div />
 
   const deleteInvalidMoves = async () => {
     if (lastMove) {
@@ -115,24 +142,13 @@ export const ChessSessionProvider = ({ children }) => {
   };
 
   const cancelGameSession = () => {
-    setModal(<EndGameSessionModal confirmCancelGameSession={confirmCancelGameSession} doNotCancelGameSession={doNotCancelGameSession} />);
+    setModal(
+      <EndGameSessionModal
+        confirmCancelGameSession={confirmCancelGameSession}
+        doNotCancelGameSession={doNotCancelGameSession}
+      />
+    );
   };
-
-  if (nextMove.from && nextMove.to) {
-    if (isValidMove(computedState, nextMove)) {
-      patchGameSessionState(
-        JSON.stringify({
-          ...persistantState,
-          moves: [...moves, nextMove]
-        }),
-        himPlaying.player.playerId
-      );
-    }
-    setNextMove({
-      from: undefined,
-      to: undefined
-    });
-  }
 
   return gameSession ? (
     <ChessSessionContext.Provider
@@ -154,6 +170,6 @@ export const ChessSessionProvider = ({ children }) => {
       {children}
     </ChessSessionContext.Provider>
   ) : (
-    <div />
-  );
+      <div />
+    );
 };

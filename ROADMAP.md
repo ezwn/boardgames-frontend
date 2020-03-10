@@ -7,7 +7,7 @@ v0.5 (MVP 1 amis)
 v0.6
 -----------------
 
-* dame blanche sur quase blanche
+* persistance du jour au lendemain
 * https://fr.wikipedia.org/wiki/En_passant_(%C3%A9checs)
 * choix pas clair lors de l'annulation
 * présenter l'échiquier dans le bon sens.
@@ -24,3 +24,8 @@ Version publique
 * meilleure prédiction des mouvements valides
 * ajout d'utilisateur / changement mot de passe
 * suppression automatique des utilisateurs / parties ?
+
+FAIT
+----
+
+* dame blanche sur quase blanche
