@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { GameSessionContext } from "libs/gameSession/contexts/GameSession-ctx";
-import { isValidMove, getColor } from "./ChessEngine";
+import { isValidMove } from "../engine/engine";
 import { CurrentPlayerContext } from "libs/player/contexts/CurrentPlayer-ctx";
 import { EndGameSessionModal } from "../components/EndGameSessionModal-cmp";
 import { ModalOutputContext } from "libs/ezwn-mobile-ui/ModalOutput-cmp";
 import { computeWorkState } from "./ChessSession-sml";
+import { getColor } from "../engine/pieces";
 
 export const ChessSessionContext = React.createContext(null);
 
@@ -71,8 +72,6 @@ export const ChessSessionProvider = ({ children }) => {
       });
     }
   }, [computedState, nextMove, hisPlayerId, moves, patchGameSessionState, persistantState]);
-
-
 
   if (!computedState)
     return <div />

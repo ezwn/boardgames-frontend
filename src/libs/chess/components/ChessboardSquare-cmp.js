@@ -1,7 +1,7 @@
 import React from 'react';
-import { isEmpty } from '../contexts/ChessEngine';
 
 import './ChessboardSquare-cmp.css';
+import { isEmpty } from '../engine/pieces';
 
 export const ChessboardSquare = ({ piece, className = '', onClick = () => { } }) => {
 

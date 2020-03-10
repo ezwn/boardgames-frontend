@@ -1,4 +1,4 @@
-import { computeState } from "./ChessEngine";
+import { computeState } from "../engine/engine";
 
 const defaultPersistantState = JSON.stringify({
   moves: []

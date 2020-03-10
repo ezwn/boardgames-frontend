@@ -21,6 +21,7 @@ export const NewGameSessionProvider = ({ children }) => {
     if (!newGameSessionIsValid) return;
 
     const gameSession = {
+      status: "RUNNING",
       playings: [
         {
           role: myColor,

@@ -9,9 +9,30 @@ import {
   NewGameSessionProvider
 } from "libs/gameSession/contexts/NewGameSession-ctx";
 
-import { getTranslatedColorName } from "libs/chess/contexts/ChessEngine";
 
 import "./NewGameSession-cmp.css";
+
+
+export const getTranslatedColorName = color => {
+  switch (color) {
+    case "WHITE":
+      return (
+        <>
+          <Localized lang="fr">BLANCHE</Localized>
+          <Localized lang="tw">白棋</Localized>
+        </>
+      );
+    case "BLACK":
+      return (
+        <>
+          <Localized lang="fr">NOIRE</Localized>
+          <Localized lang="tw">黑棋</Localized>
+        </>
+      );
+    default:
+      return undefined;
+  }
+};
 
 export const NewGameSessionView = props => (
   <NewGameSessionProvider>
