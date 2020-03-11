@@ -47,7 +47,7 @@ export const GameSessionListView = () => {
 export const GameSessionList = () => {
   const { myGameSessions } = useContext(MyGameSessionsContext);
   return (
-    <div className="CenterArea GameSessionList">
+    <div className="CenterArea GameSessionList" role='list'>
       {myGameSessions && myGameSessions.length ? (
         myGameSessions.map(gsData => (
           <GameSessionListItem
@@ -77,7 +77,7 @@ export const GameSessionListItem = ({ gameSession }) => {
   const myTurn = mePlaying.nextToPlay;
 
   return (
-      <Link to={`/ChessboardView/${gameSessionId}`} className={`notALink GameSessionListItem${myTurn ? " myTurn" : ""}`}>
+      <Link role='list' to={`/ChessboardView/${gameSessionId}`} className={`notALink GameSessionListItem${myTurn ? " myTurn" : ""}`}>
         <div className='left'>
           <PlayingList playings={playings} />
           <div className="GameSessionLabel">{label}</div>

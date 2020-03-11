@@ -5,21 +5,21 @@ import tw from './flags/tw.svg';
 
 import './index.css';
 
-const Context = React.createContext();
+export const LocalizationContext = React.createContext();
 
 export const LocalizationProvider = ({ children }) => {
     const [lang, setLang] = useState('fr');
 
-    return <Context.Provider value={{ lang, setLang }}>
+    return <LocalizationContext.Provider value={{ lang, setLang }}>
         {children}
-    </Context.Provider>
+    </LocalizationContext.Provider>
 }
 
-export const Localized = ({ children, lang: contextLang }) => <Context.Consumer>
+export const Localized = ({ children, lang: contextLang }) => <LocalizationContext.Consumer>
     {({ lang }) => lang === contextLang ? <>{children}</> : <></>}
-</Context.Consumer>;
+</LocalizationContext.Consumer>;
 
-export const LanguageSelector = () => <Context.Consumer>
+export const LanguageSelector = () => <LocalizationContext.Consumer>
     {
         ({ setLang }) => <div className='LanguageSelector'>
             <div className='flag' onClick={() => setLang('fr')}>
@@ -30,4 +30,4 @@ export const LanguageSelector = () => <Context.Consumer>
             </div>
         </div>
     }
-</Context.Consumer>;
+</LocalizationContext.Consumer>;

@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import * as api from "../player-apic";
+import { AppView } from "libs/ezwn-mobile-ui/AppView-cmp";
+import urlSearchParams from "libs/url-search-params";
 
 export const CurrentPlayerContext = React.createContext(null);
 
 export const DefaultUnloggedComponent = () => (
-  <div>
+  <AppView title={"Vous n'êtes pas inscrit"} titleLeftButton={<></>}>
     Pour accéder à cette version du jeu :
     <ul>
       <li>
@@ -14,7 +16,7 @@ export const DefaultUnloggedComponent = () => (
         Si vous êtes inscrit, utilisez le lien qui vous a été envoyé par email.
       </li>
     </ul>
-  </div>
+  </AppView>
 );
 
 export const CurrentPlayerProvider = ({ children }) => {
@@ -24,22 +26,18 @@ export const CurrentPlayerProvider = ({ children }) => {
     try {
       const player = await api.login(playerId, password);
       setCurrentPlayer(player);
-    } catch (error) { }
+    } catch (error) {}
   };
-
-  const { search } = window.location;
 
   useEffect(() => {
     if (!currentPlayer) {
-      var urlParams = new URLSearchParams(search);
-      const playerName = urlParams.get("playerName");
-      const playerPassword = urlParams.get("playerPassword");
-
+      const playerName = urlSearchParams.get("playerName");
+      const playerPassword = urlSearchParams.get("playerPassword");
       if (playerName && playerPassword) {
         login(playerName, playerPassword);
       }
     }
-  }, [currentPlayer, search]);
+  }, [currentPlayer]);
 
   if (!currentPlayer) {
     return <DefaultUnloggedComponent />;
