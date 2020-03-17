@@ -1,10 +1,12 @@
-import http from 'axios';
+import { http } from "core/http";
 
-const backendUrl = process.env.REACT_APP_BGF_BACKEND;
-
-export const login = async (playerId, password) => {
+export const login = async () => {
+    
     try {
-        const response = await http.post(`${backendUrl}/players/login`, { name: playerId, password });
+
+        const response = await http.get(
+            `/players/me`
+        );
         return response.data;
     } catch (error) {
         if (!error.response) {
@@ -21,7 +23,7 @@ export const login = async (playerId, password) => {
 
 export const searchPlayers = async (playerName) => {
     try {
-        const response = await http.get(`${backendUrl}/players/findByNameStartsWith?playerName=${playerName}`);
+        const response = await http.get(`/players/findByNameStartsWith?playerName=${playerName}`);
         return response.data;
     } catch (error) {
         if (!error.response) {

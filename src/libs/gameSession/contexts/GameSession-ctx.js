@@ -3,6 +3,13 @@ import { useHistory } from "react-router";
 
 import * as api from "libs/gameSession/gameSession-apic";
 
+const refreshDuration = parseInt(process.env.REACT_APP_REFRESH_DURATION);
+
+export const GameSessionStatus = {
+	RUNNING: 'RUNNING',
+	FINISHED: 'FINISHED'
+}
+
 export const GameSessionContext = React.createContext(null);
 
 export const GameSessionProvider = ({ children, gameSessionId }) => {
@@ -21,7 +28,7 @@ export const GameSessionProvider = ({ children, gameSessionId }) => {
         });
     }
 
-    const inteval = setInterval(fetchGameSession, 1000);
+    const inteval = setInterval(fetchGameSession, refreshDuration);
     fetchGameSession();
 
     return () => {
@@ -42,14 +49,15 @@ export const GameSessionProvider = ({ children, gameSessionId }) => {
     });
   };
 
-  const deleteGameSession = async gameSessionId => {
-    await api.deleteGameSession(gameSessionId);
-    history.push(`/`);
+  const finishGameSession = async (gameSession, gameSessionResult) => {
+    console.log(gameSession, gameSessionResult);
+    await api.finishGameSession(gameSession.gameSessionId, gameSessionResult);
+    // history.push(`/`);
   };
 
   return gameSession ? (
     <GameSessionContext.Provider
-      value={{ gameSession, saveGameSession, deleteGameSession, patchGameSessionState }}
+      value={{ gameSession, saveGameSession, finishGameSession, patchGameSessionState }}
     >
       {children}
     </GameSessionContext.Provider>

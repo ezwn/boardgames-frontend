@@ -1,5 +1,4 @@
 import { isWhiteAt, isBlackAt, squarePut, squareGet, isEmptyAt, isKingAt } from "./board";
-import { isKing } from "./pieces";
 
 const initialState = () => ({
   player: "WHITE",

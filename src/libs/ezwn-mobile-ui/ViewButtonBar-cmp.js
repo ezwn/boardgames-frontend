@@ -10,6 +10,6 @@ export const ViewBottomButtonBar = ({ children }) => <div className='ViewBottomB
     {children}
 </div>
 
-export const SecondaryButtonBar = ({ children }) => <div className='SecondaryButtonBar ButtonBar'>
+export const TextButtonBar = ({ children }) => <div className='TextButtonBar ButtonBar'>
     {children}
 </div>

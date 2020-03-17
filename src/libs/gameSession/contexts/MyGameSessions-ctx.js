@@ -3,6 +3,8 @@ import * as api from 'libs/gameSession/gameSession-apic';
 
 export const MyGameSessionsContext = React.createContext(null);
 
+const refreshDuration = parseInt(process.env.REACT_APP_REFRESH_DURATION);
+
 export const MyGameSessionsProvider = ({ children, playerId }) => {
     const [myGameSessions, setMyGameSessions] = React.useState([]);
 
@@ -15,7 +17,7 @@ export const MyGameSessionsProvider = ({ children, playerId }) => {
             }
         }
 
-        const inteval = setInterval(fetchGameSession, 1000);
+        const inteval = setInterval(fetchGameSession, refreshDuration);
         fetchGameSession();
 
         return () => {

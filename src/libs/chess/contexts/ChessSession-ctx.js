@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { GameSessionContext } from "libs/gameSession/contexts/GameSession-ctx";
+import { GameSessionContext, GameSessionStatus } from "libs/gameSession/contexts/GameSession-ctx";
 import { isValidMove } from "../engine/engine";
 import { CurrentPlayerContext } from "libs/player/contexts/CurrentPlayer-ctx";
 import { EndGameSessionModal } from "../components/EndGameSessionModal-cmp";
@@ -7,10 +7,16 @@ import { ModalOutputContext } from "libs/ezwn-mobile-ui/ModalOutput-cmp";
 import { computeWorkState } from "./ChessSession-sml";
 import { getColor } from "../engine/pieces";
 
+export const GameSessionResult = {
+  VICTORY: 'VICTORY',
+  DEFEAT: 'DEFEAT',
+  DRAW: 'DRAW'
+};
+
 export const ChessSessionContext = React.createContext(null);
 
 export const ChessSessionProvider = ({ children }) => {
-  const { gameSession, deleteGameSession, patchGameSessionState } = useContext(
+  const { gameSession, finishGameSession, patchGameSessionState } = useContext(
     GameSessionContext
   );
 
@@ -50,7 +56,8 @@ export const ChessSessionProvider = ({ children }) => {
     mePlaying,
     himPlaying,
     myRole,
-    myTurn
+    myTurn,
+    status
   } = workState;
 
   const hisPlayerId = himPlaying && himPlaying.player.playerId;
@@ -91,7 +98,12 @@ export const ChessSessionProvider = ({ children }) => {
   };
 
   const squareTouch = async (c, l, piece) => {
-    if (!myTurn || (lastMove && lastMove.canceled)) {
+    if (!myTurn || status===GameSessionStatus.FINISHED) {
+      return;
+    }
+
+    if (lastMove && lastMove.canceled) {
+      await deleteInvalidMoves();
       return;
     }
 
@@ -113,7 +125,7 @@ export const ChessSessionProvider = ({ children }) => {
   };
 
   const invalidateMove = async () => {
-    if (!myTurn) {
+    if (!myTurn || status===GameSessionStatus.FINISHED) {
       return;
     }
 
@@ -135,9 +147,9 @@ export const ChessSessionProvider = ({ children }) => {
     setCancelGameSessionRequested(false);
   };
 
-  const confirmCancelGameSession = () => {
+  const confirmCancelGameSession = (gameSessionResult) => {
     setModal(null);
-    deleteGameSession(gameSession.gameSessionId);
+    finishGameSession(gameSession, gameSessionResult);
   };
 
   const cancelGameSession = () => {
@@ -155,6 +167,7 @@ export const ChessSessionProvider = ({ children }) => {
         squareTouch,
         myRole,
         myTurn,
+        status,
         computedState,
         invalidateMove,
         cancelGameSession,

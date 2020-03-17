@@ -28,16 +28,15 @@
     box-shadow: 2px 6px 4px #bbb; 
 }
 
-.SecondaryButtonBar .Button {
-    display: inline-block;
-    height: var(--secondary-buttonbar-button-size);
-    width: var(--secondary-buttonbar-button-size);
-    line-height: var(--secondary-buttonbar-button-size);
+.TextButtonBar {
+    text-align: right;
+}
+
+.TextButton {
     cursor: pointer;
-    font-size: 18px;
-    background-color: var(--bg-color-alt);
-    color: var(--text-color-alt);
-    border-radius: 30px;
-    text-align: center;
-    box-shadow: 2px 6px 4px #bbb; 
+    border: none;
+    background: none;
+    margin-left: 20px;
+    font-weight: bold;
+    color: var(--text-button-color)
 }

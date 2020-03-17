@@ -5,6 +5,8 @@ const defaultPersistantState = JSON.stringify({
 });
 
 export const computeWorkState = (currentPlayerId, gameSession) => {
+  const {status} = gameSession;
+
   const mePlaying = gameSession.playings.find(
     p => p.player.playerId === currentPlayerId
   );
@@ -31,6 +33,7 @@ export const computeWorkState = (currentPlayerId, gameSession) => {
     mePlaying,
     himPlaying,
     myRole,
-    myTurn
+    myTurn,
+    status
   };
 };

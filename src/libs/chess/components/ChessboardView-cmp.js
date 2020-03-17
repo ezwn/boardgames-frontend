@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 
 import {
   GameSessionProvider,
-  GameSessionContext
+  GameSessionContext,
+  GameSessionStatus
 } from "libs/gameSession/contexts/GameSession-ctx";
 import { AppView } from "libs/ezwn-mobile-ui/AppView-cmp";
 import { useParams } from "react-router";
@@ -33,7 +34,7 @@ export const ChessboardView = props => {
 };
 
 const ChessboardViewDumb = () => {
-  const { myTurn, invalidateMove, lastMove, cancelGameSession } = useContext(ChessSessionContext);
+  const { myTurn, invalidateMove, lastMove, cancelGameSession, status } = useContext(ChessSessionContext);
   const { gameSession } = useContext(GameSessionContext);
   const { centerAreaWidth, centerAreaHeight } = useContext(AppLayoutContext);
 
@@ -59,9 +60,9 @@ const ChessboardViewDumb = () => {
         <>
           <UndoButton
             onClick={invalidateMove}
-            disabled={!myTurn || !lastMove || lastMove.canceled}
+            disabled={!myTurn || !lastMove || lastMove.canceled ||  status===GameSessionStatus.FINISHED}
           />
-          <StopButton onClick={cancelGameSession} />
+          <StopButton onClick={cancelGameSession} disabled={status===GameSessionStatus.FINISHED} />
         </>
       }
       titleRightButtonArea={<MyColorIndicator />}

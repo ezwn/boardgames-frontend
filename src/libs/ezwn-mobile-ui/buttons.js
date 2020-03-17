@@ -18,3 +18,5 @@ export const ValidateButton = (props) => <Button {...props} icon={<i className='
 export const StopButton = (props) => <Button {...props} icon={<i className='fas fa-stop'></i>} />;
 
 export const CancelButton = (props) => <Button {...props} icon={<i className='fas fa-times'></i>} />;
+
+export const TextButton = ({ children, onClick, disabled }) => <button className='TextButton' onClick={onClick} disabled={disabled}>{children}</button>;
