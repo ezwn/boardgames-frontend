@@ -38,7 +38,7 @@ const MainAreaChessboardSquare = ({ piece, c, l }) => {
 
   return (
     <ChessboardSquare
-      onClick={() => squareTouch(c, l, piece)}
+      onClick={() => squareTouch(c, l)}
       piece={piece}
       className={className}
     />

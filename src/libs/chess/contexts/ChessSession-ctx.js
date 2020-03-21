@@ -6,6 +6,7 @@ import { EndGameSessionModal } from "../components/EndGameSessionModal-cmp";
 import { ModalOutputContext } from "libs/ezwn-mobile-ui/ModalOutput-cmp";
 import { computeWorkState } from "./ChessSession-sml";
 import { getColor } from "../engine/pieces";
+import { squareGet } from "../engine/board";
 
 export const GameSessionResult = {
   VICTORY: 'VICTORY',
@@ -97,7 +98,7 @@ export const ChessSessionProvider = ({ children }) => {
     }
   };
 
-  const squareTouch = async (c, l, piece) => {
+  const squareTouch = async (c, l) => {
     if (!myTurn || status===GameSessionStatus.FINISHED) {
       return;
     }
@@ -108,18 +109,20 @@ export const ChessSessionProvider = ({ children }) => {
     }
 
     if (!nextMove.from) {
+
+      const piece = squareGet(computedState.board, {c, l});
       if (getColor(piece) !== computedState.player) {
         return;
       }
 
       setNextMove({
         ...nextMove,
-        from: { c, l, piece }
+        from: { c, l }
       });
     } else if (!nextMove.to) {
       setNextMove({
         ...nextMove,
-        to: { c, l, piece }
+        to: { c, l }
       });
     }
   };
