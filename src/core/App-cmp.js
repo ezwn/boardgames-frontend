@@ -8,8 +8,8 @@ import { NewGameSessionView } from "libs/gameSession/components/NewGameSession-c
 import { LocalizationProvider } from "libs/ezwn-i18n";
 
 import "./App-cmp.css";
-import { AppLayoutProvider } from "libs/ezwn-mobile-ui/AppLayout-ctx";
-import { ModalOutput, ModalOutputProvider } from "libs/ezwn-mobile-ui/ModalOutput-cmp";
+import { AppLayoutProvider } from "libs/ezwn-mobile-webui/AppLayout-ctx";
+import { ModalOutput, ModalOutputProvider } from "libs/ezwn-mobile-webui/ModalOutput-cmp";
 
 const App = () => (
   <AppLayoutProvider>

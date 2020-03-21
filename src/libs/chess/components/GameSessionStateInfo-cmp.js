@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import { ChessSessionContext } from "../contexts/ChessSession-ctx";
 import { Localized } from "libs/ezwn-i18n";
-import { infoBarHeight } from "libs/ezwn-mobile-ui/AppLayout-ctx";
+import { infoBarHeight } from "libs/ezwn-mobile-webui/AppLayout-ctx";
 
 import "./GameSessionStateInfo-cmp.css";
 import { GameSessionStatus } from "libs/gameSession/contexts/GameSession-ctx";

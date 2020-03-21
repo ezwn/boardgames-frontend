@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import { CreateButton } from "libs/ezwn-mobile-ui/buttons";
+import { CreateButton } from "libs/ezwn-mobile-webui/buttons";
 import { CurrentPlayerContext } from "libs/player/contexts/CurrentPlayer-ctx";
 import {
   MyGameSessionsProvider,
@@ -10,7 +10,7 @@ import {
 import { Localized, LanguageSelector } from "libs/ezwn-i18n";
 
 import "./GameSessionList-cmp.css";
-import { AppView } from "libs/ezwn-mobile-ui/AppView-cmp";
+import { AppView } from "libs/ezwn-mobile-webui/AppView-cmp";
 import { PlayingList } from "./PlayingList-cmp";
 
 export const GameSessionListView = () => {

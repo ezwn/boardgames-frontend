@@ -1,7 +1,7 @@
 import React from "react";
 
-import { TextButton } from "libs/ezwn-mobile-ui/buttons";
-import { TextButtonBar } from "libs/ezwn-mobile-ui/ViewButtonBar-cmp";
+import { TextButton } from "libs/ezwn-mobile-webui/buttons";
+import { TextButtonBar } from "libs/ezwn-mobile-webui/ViewButtonBar-cmp";
 import { Localized } from "libs/ezwn-i18n";
 
 import "./EndGameSessionModal-cmp.css";

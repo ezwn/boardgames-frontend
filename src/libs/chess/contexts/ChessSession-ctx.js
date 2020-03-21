@@ -3,7 +3,7 @@ import { GameSessionContext, GameSessionStatus } from "libs/gameSession/contexts
 import { isValidMove } from "../engine/engine";
 import { CurrentPlayerContext } from "libs/player/contexts/CurrentPlayer-ctx";
 import { EndGameSessionModal } from "../components/EndGameSessionModal-cmp";
-import { ModalOutputContext } from "libs/ezwn-mobile-ui/ModalOutput-cmp";
+import { ModalOutputContext } from "libs/ezwn-mobile-webui/ModalOutput-cmp";
 import { computeWorkState } from "./ChessSession-sml";
 import { getColor } from "../engine/pieces";
 import { squareGet } from "../engine/board";

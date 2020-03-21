@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
-import { AppView } from "libs/ezwn-mobile-ui/AppView-cmp";
-import { ValidateButton } from "libs/ezwn-mobile-ui/buttons";
+import { AppView } from "libs/ezwn-mobile-webui/AppView-cmp";
+import { ValidateButton } from "libs/ezwn-mobile-webui/buttons";
 import { PlayerSelect } from "libs/player/components/PlayerSelect-cmp";
 import { Localized } from "libs/ezwn-i18n";
 import {

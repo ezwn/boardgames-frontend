@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import * as api from "../player-apic";
-import { AppView } from "libs/ezwn-mobile-ui/AppView-cmp";
+import { AppView } from "libs/ezwn-mobile-webui/AppView-cmp";
 import urlSearchParams from "libs/url-search-params";
 
 export const CurrentPlayerContext = React.createContext(null);

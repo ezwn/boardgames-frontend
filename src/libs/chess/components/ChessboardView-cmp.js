@@ -5,17 +5,17 @@ import {
   GameSessionContext,
   GameSessionStatus
 } from "libs/gameSession/contexts/GameSession-ctx";
-import { AppView } from "libs/ezwn-mobile-ui/AppView-cmp";
+import { AppView } from "libs/ezwn-mobile-webui/AppView-cmp";
 import { useParams } from "react-router";
 import { PlayingList } from "libs/gameSession/components/PlayingList-cmp";
 import { ChessSessionProvider } from "../contexts/ChessSession-ctx";
-import { UndoButton, StopButton } from "libs/ezwn-mobile-ui/buttons";
+import { UndoButton, StopButton } from "libs/ezwn-mobile-webui/buttons";
 import { GameSessionStateInfo } from "./GameSessionStateInfo-cmp";
 import { ChessboardJail } from "./ChessboardJail-cmp";
 import { ChessSessionContext } from "../contexts/ChessSession-ctx";
 import { ChessboardMainArea } from "./ChessboardMainArea-cmp";
 import { MyColorIndicator } from "./MyColorIndicator-cmp";
-import { AppLayoutContext } from "libs/ezwn-mobile-ui/AppLayout-ctx";
+import { AppLayoutContext } from "libs/ezwn-mobile-webui/AppLayout-ctx";
 
 import "./ChessboardView-cmp.css";
 
