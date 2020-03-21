@@ -1,0 +1,11 @@
+@startuml dependencies
+
+[ezwn-backend-status] ..> [ezwn-mobile-webui] : uses
+[gameSession] ..> [ezwn-mobile-webui] : uses
+[gameSession] ..> [ezwn-i18n] : uses
+[gameSession] ..> [player] : uses
+[chess] ..> [ezwn-mobile-webui] : uses
+[player] ..> [ezwn-mobile-webui] : uses
+[chess] ..> [gameSession] : uses
+
+@enduml

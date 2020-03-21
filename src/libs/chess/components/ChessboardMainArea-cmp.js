@@ -27,6 +27,7 @@ const MainAreaChessboardSquare = ({ piece, c, l }) => {
 
   const isLastMoveFrom =
     lastMove && lastMove.from.c === c && lastMove.from.l === l;
+    
   const isLastMoveTo = lastMove && lastMove.to.c === c && lastMove.to.l === l;
   if (isLastMoveFrom || isLastMoveTo) {
     className += lastMove.canceled ? " canceledMove" : " lastMove";

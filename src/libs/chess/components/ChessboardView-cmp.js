@@ -18,6 +18,7 @@ import { MyColorIndicator } from "./MyColorIndicator-cmp";
 import { AppLayoutContext } from "libs/ezwn-mobile-webui/AppLayout-ctx";
 
 import "./ChessboardView-cmp.css";
+import { PlayerColor } from "../engine/engine";
 
 const chessboardViewPadding = 10;
 
@@ -69,9 +70,9 @@ const ChessboardViewDumb = () => {
       infoBar={<GameSessionStateInfo />}
     >
       <div className={`CenterArea ChessboardCenterArea ${verticalMode ? 'vertical' : 'horizontal'}`}>
-        <ChessboardJail color="white" cbSize={cbSize} verticalMode={verticalMode} />
+        <ChessboardJail ownerColor={PlayerColor.WHITE} cbSize={cbSize} verticalMode={verticalMode} />
         <ChessboardMainArea cbSize={cbSize} />
-        <ChessboardJail color="black" cbSize={cbSize} verticalMode={verticalMode} />
+        <ChessboardJail ownerColor={PlayerColor.BLACK} cbSize={cbSize} verticalMode={verticalMode} />
       </div>
     </AppView>
   );

@@ -1,7 +1,22 @@
-import { isWhiteAt, isBlackAt, squarePut, squareGet, isEmptyAt, isKingAt } from "./board";
+import { isWhiteAt, isBlackAt, isEmptyAt } from "./board";
+import { findMoveHandler } from './moves';
+
+export const PlayerColor = {
+  WHITE: "WHITE",
+  BLACK: "BLACK"
+};
+
+export const oppositePlayerColor = playerColor =>
+  playerColor === PlayerColor.WHITE ? PlayerColor.BLACK : PlayerColor.WHITE
+
+export const BoardType = {
+  MAIN_BOARD: "MAIN_BOARD",
+  WHITE_JAIL: "WHITE_JAIL",
+  BLACK_JAIL: "BLACK_JAIL"
+};
 
 const initialState = () => ({
-  player: "WHITE",
+  player: PlayerColor.WHITE,
   board: [
     "tnbqkbnt",
     "pppppppp",
@@ -13,44 +28,23 @@ const initialState = () => ({
     "TNBQKBNT"
   ],
   jail: {
-    white: "",
-    black: ""
-  }
+    [PlayerColor.WHITE]: "",
+    [PlayerColor.BLACK]: ""
+  },
+  affectedSquares: []
 });
 
 export const computeState = (moves, state = initialState()) => {
   moves.forEach(move => {
+    let { board } = state;
     const { from, to } = move;
-    if (from && to && !move.canceled) {
-      let { board } = state;
-
-      const toPiece = squareGet(board, to);
-
-      if (isWhiteAt(board, to)) state.jail.white += toPiece;
-      else if (isBlackAt(board, to)) state.jail.black += toPiece;
-
-      board = squarePut(
-        board,
-        to,
-        squareGet(board, from)
-      );
-
-      board = squarePut(board, from, " ");
-
-      if (isKingAt(board, to) && from.c===4) {
-        if (to.c === from.c - 2) {
-          const tower = squareGet(board, { ...from, c: 0 });
-          board = squarePut(board, { ...from, c: 3 }, tower);
-          board = squarePut(board, { ...from, c: 0 }, " ");
-        } else if (to.c === from.c + 2) {
-          const tower = squareGet(board, { ...from, c: 7 });
-          board = squarePut(board, { ...from, c: 5 }, tower);
-          board = squarePut(board, { ...from, c: 7 }, " ");
-        }
+    if (from && to) {
+      const moveHandler = findMoveHandler(board, from, to);
+      state.affectedSquares = moveHandler.affectedSquares(state, move);
+      if (!move.canceled) {
+        state = moveHandler.execute(state, move);
+        state.player = oppositePlayerColor(state.player);
       }
-
-      state.board = board;
-      state.player = state.player === "WHITE" ? "BLACK" : "WHITE";
     }
   });
   return state;
