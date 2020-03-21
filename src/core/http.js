@@ -11,3 +11,8 @@ export const http = axios.create({
         Authorization: 'Basic ' + btoa(`${playerName}:${playerPassword}`)
     }
 });
+
+
+export const anonymousHttp = axios.create({
+    baseURL: backendUrl
+});

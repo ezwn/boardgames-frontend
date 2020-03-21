@@ -1,0 +1,10 @@
+.BackendDownWarning {
+    position: absolute;
+    background-color: #00000070;
+    color: white;
+    padding: 25px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-end;
+    font-size: 110%;
+}

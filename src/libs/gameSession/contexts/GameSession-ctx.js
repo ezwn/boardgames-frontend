@@ -24,7 +24,7 @@ export const GameSessionProvider = ({ children, gameSessionId }) => {
           setGameSession(newGs);
         })
         .catch(() => {
-          history.push(`/`);
+          // connection lost handled by BackendStatus
         });
     }
 

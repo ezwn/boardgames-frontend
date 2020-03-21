@@ -10,30 +10,35 @@ import { LocalizationProvider } from "libs/ezwn-i18n";
 import "./App-cmp.css";
 import { AppLayoutProvider } from "libs/ezwn-mobile-webui/AppLayout-ctx";
 import { ModalOutput, ModalOutputProvider } from "libs/ezwn-mobile-webui/ModalOutput-cmp";
+import { BackendStatusProvider } from "libs/ezwn-backend-status/contexts/BackendStatus-ctx";
+import { BackendDownWarning } from "libs/ezwn-backend-status/components/BackendDownWarning-cmp";
 
 const App = () => (
-  <AppLayoutProvider>
-    <CurrentPlayerProvider>
-      <LocalizationProvider>
-        <ModalOutputProvider>
-          <ModalOutput />
-          <Router>
-            <Switch>
-              <Route exact path="/">
-                <GameSessionListView />
-              </Route>
-              <Route exact path="/ChessboardView/:gameSessionId">
-                <ChessboardView />
-              </Route>
-              <Route exact path="/NewGameSessionView">
-                <NewGameSessionView />
-              </Route>
-            </Switch>
-          </Router>
-        </ModalOutputProvider>
-      </LocalizationProvider>
-    </CurrentPlayerProvider>
-  </AppLayoutProvider>
+  <BackendStatusProvider>
+    <AppLayoutProvider>
+      <CurrentPlayerProvider>
+        <LocalizationProvider>
+          <ModalOutputProvider>
+            <ModalOutput />
+            <BackendDownWarning />
+            <Router>
+              <Switch>
+                <Route exact path="/">
+                  <GameSessionListView />
+                </Route>
+                <Route exact path="/ChessboardView/:gameSessionId">
+                  <ChessboardView />
+                </Route>
+                <Route exact path="/NewGameSessionView">
+                  <NewGameSessionView />
+                </Route>
+              </Switch>
+            </Router>
+          </ModalOutputProvider>
+        </LocalizationProvider>
+      </CurrentPlayerProvider>
+    </AppLayoutProvider>
+  </BackendStatusProvider>
 );
 
 export default App;
