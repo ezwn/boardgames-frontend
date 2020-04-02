@@ -7,7 +7,7 @@ import {
   MyGameSessionsProvider,
   MyGameSessionsContext
 } from "libs/gameSession/contexts/MyGameSessions-ctx";
-import { Localized, LanguageSelector } from "libs/ezwn-i18n";
+import { Localized } from "libs/ezwn-i18n";
 
 import "./GameSessionList-cmp.css";
 import { AppView } from "libs/ezwn-mobile-webui/AppView-cmp";
@@ -33,7 +33,6 @@ export const GameSessionListView = () => {
           <Localized lang="tw">進行中的棋盤</Localized>
         </>
       }
-      titleRightButtonArea={<LanguageSelector />}
     >
       <MyGameSessionsProvider
         playerId={currentPlayer && currentPlayer.playerId}
