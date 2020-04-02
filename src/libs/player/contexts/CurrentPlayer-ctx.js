@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as api from "../player-apic";
 import { AppView } from "libs/ezwn-mobile-webui/AppView-cmp";
-import urlSearchParams from "libs/url-search-params";
+import { playerName, playerPassword } from "core/Settings";
 
 export const CurrentPlayerContext = React.createContext(null);
 
@@ -31,8 +31,6 @@ export const CurrentPlayerProvider = ({ children }) => {
 
   useEffect(() => {
     if (!currentPlayer) {
-      const playerName = urlSearchParams.get("playerName");
-      const playerPassword = urlSearchParams.get("playerPassword");
       if (playerName && playerPassword) {
         login(playerName, playerPassword);
       }

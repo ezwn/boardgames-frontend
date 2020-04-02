@@ -1,6 +1,7 @@
 {
   "short_name": "Chess by ezwn",
   "name": "Chess by ezwn",
+  "description": "A social chess game",
   "icons": [
     {
       "src": "favicon.ico",

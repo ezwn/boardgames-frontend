@@ -1,7 +1,6 @@
 import { http } from "core/http";
-import urlSearchParams from "libs/url-search-params";
+import { replacePlayerName } from "core/Settings";
 
-const replacePlayerName = urlSearchParams.get("replacePlayerName");
 const [playerIdStr, playerName] = replacePlayerName ? replacePlayerName.split('_') : [undefined, undefined];
 const playerId = playerIdStr ? parseInt(playerIdStr) : undefined;
 
