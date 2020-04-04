@@ -1,0 +1,16 @@
+
+.ColorIndicator {
+  width: 22px;
+  height: 22px;
+  border-radius: 22px;
+}
+
+.ColorIndicator.WHITE {
+  background-color: white;
+  border: solid rgba(0, 0, 0, 0.4) 2px;
+}
+
+.ColorIndicator.BLACK {
+  background-color: black;
+  border: solid rgba(255, 255, 255, 0.4) 2px;
+}

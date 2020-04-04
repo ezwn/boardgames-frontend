@@ -2,14 +2,23 @@ import React, { useContext } from "react";
 
 import "./PlayingList-cmp.css";
 import { CurrentPlayerContext } from "libs/player/contexts/CurrentPlayer-ctx";
+import { ColorIndicator } from "libs/chess/components/ColorIndicator-cmp";
 
 export const PlayingList = ({ playings }) => {
   const { currentPlayer } = useContext(CurrentPlayerContext);
 
+  const isMine = playing => playing.player.playerId === currentPlayer.playerId
+  const isNotMine = playing => playing.player.playerId !== currentPlayer.playerId
+
   return (
     <div className="PlayingList">
       {playings
-        .filter(playing => playing.player.playerId !== currentPlayer.playerId)
+        .filter(isNotMine)
+        .map(playing => (
+          <Playing key={playing.playingId} {...playing} />
+        ))}
+      {playings
+        .filter(isMine)
         .map(playing => (
           <Playing key={playing.playingId} {...playing} />
         ))}
@@ -17,8 +26,13 @@ export const PlayingList = ({ playings }) => {
   );
 };
 
-export const Playing = ({ player }) => {
+const Playing = ({ player, role }) => {
   const { currentPlayer } = useContext(CurrentPlayerContext);
   const isMe = currentPlayer.playerId === player.playerId;
-  return <>{isMe ? <>moi</>: player.name}</>;
+  return <>
+    {player.name}
+    &nbsp;
+    <ColorIndicator color={role} />
+    &nbsp;&nbsp;&nbsp;
+  </>;
 };
