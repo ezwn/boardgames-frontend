@@ -42,7 +42,7 @@ export const ChatProvider = ({ children, chatId }) => {
 
     const messageJson = JSON.parse(chat.messages);
 
-    if (messageJson.length>1)
+    if (messageJson.length>3)
       messageJson.pop();
 
     await api.saveChat({

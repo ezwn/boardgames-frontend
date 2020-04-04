@@ -67,7 +67,7 @@ export const GameSessionList = () => {
 export const GameSessionListItem = ({ gameSession }) => {
   const { currentPlayer } = useContext(CurrentPlayerContext);
 
-  const { label, gameSessionId, playings } = gameSession;
+  const { updatedOn, gameSessionId, playings } = gameSession;
 
   const mePlaying = playings.find(
     playing => playing.player.playerId === currentPlayer.playerId
@@ -76,13 +76,16 @@ export const GameSessionListItem = ({ gameSession }) => {
   const myTurn = mePlaying.nextToPlay;
 
   return (
-      <Link role='list' to={`/ChessboardView/${gameSessionId}`} className={`notALink GameSessionListItem${myTurn ? " myTurn" : ""}`}>
-        <div className='left'>
-          <PlayingList playings={playings} />
-          <div className="GameSessionLabel">{label}</div>
-        </div>
+      <Link role='list' to={`/ChessboardView/${gameSessionId}`}
+        className={`notALink GameSessionListItem${myTurn ? " myTurn" : ""}`}>
         <div className='icon'>
           &nbsp;
+        </div>
+        <div className='left'>
+          <PlayingList playings={playings} />
+          <div className="GameSessionLabel">{
+            new Date(updatedOn).toLocaleString('fr-FR')
+          }</div>
         </div>
       </Link>
   );
