@@ -5,6 +5,9 @@ import * as api from "libs/chat/chat-apic";
 
 const refreshDuration = parseInt(process.env.REACT_APP_REFRESH_DURATION);
 
+export const encode = str => btoa(encodeURIComponent(str));
+export const decode = str => decodeURIComponent(atob(str));
+
 export const ChatContext = React.createContext(null);
 
 export const ChatProvider = ({ children, chatId }) => {
@@ -42,14 +45,14 @@ export const ChatProvider = ({ children, chatId }) => {
 
     const messageJson = JSON.parse(chat.messages);
 
-    if (messageJson.length>1)
+    if (messageJson.length>3)
       messageJson.pop();
 
     await api.saveChat({
       ...chat,
       messages: JSON.stringify([{
         ...message,
-        content: btoa(message.content)
+        content: encode(message.content)
       }, ...messageJson])
     });
 

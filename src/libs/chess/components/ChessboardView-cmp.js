@@ -14,7 +14,6 @@ import { GameSessionStateInfo } from "./GameSessionStateInfo-cmp";
 import { ChessboardJail } from "./ChessboardJail-cmp";
 import { ChessSessionContext } from "../contexts/ChessSession-ctx";
 import { ChessboardMainArea } from "./ChessboardMainArea-cmp";
-import { MyColorIndicator } from "./MyColorIndicator-cmp";
 import { AppLayoutContext } from "libs/ezwn-mobile-webui/AppLayout-ctx";
 
 import "./ChessboardView-cmp.css";
@@ -66,7 +65,6 @@ const ChessboardViewDumb = () => {
           <StopButton onClick={cancelGameSession} disabled={status===GameSessionStatus.FINISHED} />
         </>
       }
-      titleRightButtonArea={<MyColorIndicator />}
       infoBar={<GameSessionStateInfo />}
     >
       <div className={`CenterArea ChessboardCenterArea ${verticalMode ? 'vertical' : 'horizontal'}`}>

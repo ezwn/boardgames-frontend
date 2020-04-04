@@ -5,7 +5,8 @@ import { ValidateButton } from "libs/ezwn-mobile-webui/buttons";
 import { Localized } from "libs/ezwn-i18n";
 import {
   ChatContext,
-  ChatProvider
+  ChatProvider,
+  decode
 } from "../context/Chat-ctx";
 
 import "./Chat-cmp.css";
@@ -50,7 +51,7 @@ export const Chat = () => {
     >
       <div className="CenterArea Chat">
         {messages.reverse().map((msg, i) => <div className='message' key={i} onClick={history.goBack}>
-          {atob(msg.content)}
+          {decode(msg.content)}
         </div>)}
         <div className="form">
           <div className="field">
