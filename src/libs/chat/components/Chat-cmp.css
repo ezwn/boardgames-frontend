@@ -1,0 +1,32 @@
+.Chat {
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+.Chat .field {
+    text-align: left;
+    margin-bottom: 70px;
+}
+
+.Chat .label {
+    margin-bottom: 15px;
+    font-size: 75%;
+}
+
+.Chat textarea {
+    box-sizing: border-box;
+    width: 98%;
+    height: 80px;
+}
+
+.message {
+    padding: 5px;
+    padding-bottom: 15px;
+    white-space: pre-line;
+}
+
+.message:not(:first-child) {
+    border-top: solid 1px black;
+}

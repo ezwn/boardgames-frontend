@@ -12,6 +12,7 @@ import { AppLayoutProvider } from "libs/ezwn-mobile-webui/AppLayout-ctx";
 import { ModalOutput, ModalOutputProvider } from "libs/ezwn-mobile-webui/ModalOutput-cmp";
 import { BackendStatusProvider } from "libs/ezwn-backend-status/contexts/BackendStatus-ctx";
 import { BackendDownWarning } from "libs/ezwn-backend-status/components/BackendDownWarning-cmp";
+import { ChatView } from "libs/chat/components/Chat-cmp";
 
 const App = () => (
   <BackendStatusProvider>
@@ -31,6 +32,9 @@ const App = () => (
                 </Route>
                 <Route exact path="/NewGameSessionView">
                   <NewGameSessionView />
+                </Route>
+                <Route exact path="/ChatView/:chatId">
+                  <ChatView />
                 </Route>
               </Switch>
             </Router>

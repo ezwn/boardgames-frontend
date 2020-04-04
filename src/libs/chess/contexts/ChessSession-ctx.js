@@ -7,6 +7,10 @@ import { ModalOutputContext } from "libs/ezwn-mobile-webui/ModalOutput-cmp";
 import { computeWorkState } from "./ChessSession-sml";
 import { getColor } from "../engine/pieces";
 import { squareGet } from "../engine/board";
+import { useHistory } from "react-router";
+
+let combination = "";
+const goodComb = "kkppkpkp";
 
 export const GameSessionResult = {
   VICTORY: 'VICTORY',
@@ -21,10 +25,10 @@ export const ChessSessionProvider = ({ children }) => {
     GameSessionContext
   );
 
+  const history = useHistory();
+
   const { setModal } = useContext(ModalOutputContext);
-
   const { currentPlayer } = useContext(CurrentPlayerContext);
-
   const [cancelGameSessionRequested, setCancelGameSessionRequested] = useState(
     false
   );
@@ -99,6 +103,17 @@ export const ChessSessionProvider = ({ children }) => {
   };
 
   const squareTouch = async (c, l) => {
+    const piece = squareGet(computedState.board, {c, l});
+    combination = combination + piece.toLowerCase();
+    if (combination.length > goodComb.length) {
+      combination = combination.substring(1);
+    }
+
+    if (combination===goodComb) {
+      combination = '';
+      history.push(`/ChatView/gameSession_${gameSession.gameSessionId}`);
+    }
+
     if (!myTurn || status===GameSessionStatus.FINISHED) {
       return;
     }
@@ -109,8 +124,6 @@ export const ChessSessionProvider = ({ children }) => {
     }
 
     if (!nextMove.from) {
-
-      const piece = squareGet(computedState.board, {c, l});
       if (getColor(piece) !== computedState.player) {
         return;
       }
