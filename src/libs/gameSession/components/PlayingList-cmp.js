@@ -28,7 +28,6 @@ export const PlayingList = ({ playings }) => {
 
 const Playing = ({ player, role }) => {
   const { currentPlayer } = useContext(CurrentPlayerContext);
-  const isMe = currentPlayer.playerId === player.playerId;
   return <>
     {player.name}
     &nbsp;
