@@ -4,6 +4,13 @@ This is the frontend for my social boardgame engine, currently only implementing
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Screenshots
+
+| The chessboard        | The session list           | Adding a new session  |
+|:-------------:|:-------------:|:-----:|
+| ![The chessboard](./doc/screenshots/Boardgame_The_Chessboard.png) | ![The session list](./doc/screenshots/Boardgame_The_session-list.png) | ![Adding a new session](./doc/screenshots/Boardgame_Adding_a_new-session.png) |
+
+
 ## The author
 
 This project has been developed by Nicolas Enzweiler.
